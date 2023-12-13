@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeGenreView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: Center(
         child: BlocBuilder<HomeFavoriteCubit, int>(

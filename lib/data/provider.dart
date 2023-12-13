@@ -20,7 +20,7 @@ abstract class Provider<T extends Model> {
     return model as T;
   }
 
-  Future<Map<String, dynamic>> read<T>(String id) async {
+  Future<Map<String, dynamic>> read<T>(String? id) async {
     final path = await _localPath;
     final file = File('$path/$collection$id.json');
     final contents = await file.readAsString();

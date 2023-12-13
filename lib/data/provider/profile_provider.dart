@@ -7,7 +7,7 @@ class ProfileProvider extends Provider<ProfileModel> {
   @override
   ProfileModel fromJson(Map<String, dynamic> json) =>
       ProfileModel.fromJson(json);
-  read<ProfileModel>(String id) async {
+  read<ProfileModel>(String? id) async {
     Map<String, dynamic> profile;
     try {
       profile = await super.read<ProfileModel>(id);

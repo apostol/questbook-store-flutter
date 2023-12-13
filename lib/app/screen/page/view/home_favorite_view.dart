@@ -9,7 +9,6 @@ import '../book_filter_page.dart';
 class HomeFavoriteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     return BlocBuilder<HomeFavoriteCubit, int>(
       builder: (context, state) {
         return _FavoriteScroll();

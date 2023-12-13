@@ -30,15 +30,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   _ProfileStatusChanged(ProfileStatusChanged event, Emitter<ProfileState> emit) {
-    _mapProfileStatusChangedToState(event);
+    emit(_mapProfileStatusChangedToState(event));
   }
 
   _ProfileEventCreate(ProfileEventCreate event, Emitter<ProfileState> emit) {
-    _profileRepository.create(ProfileModel.empty).then((value) => ProfileState.created(value));
+    _profileRepository.create(ProfileModel.empty).then((value) => emit(ProfileState.created(value)));
   }
 
   _ProfileEventRead(ProfileEventRead event, Emitter<ProfileState> emit) {
-    ProfileState.read(_profileRepository.profile!);
+    emit(ProfileState.read(_profileRepository.profile!));
   }
 
   _ProfileEventDelete(ProfileEventDelete event, Emitter<ProfileState> emit) {
@@ -59,7 +59,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             event.profile.phone,
             event.profile.location);
       _profileRepository.update(_profile);
-      ProfileState.updated(_profile);
+      emit(ProfileState.updated(_profile));
     });
   }
 
@@ -70,10 +70,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     return super.close();
   }
 
-  Future<ProfileState> _mapProfileStatusChangedToState(
-      ProfileStatusChanged event,
-      ) async {
-      var _profile = _profileRepository.profile;
+  ProfileState _mapProfileStatusChangedToState(
+      ProfileStatusChanged event
+      ) {
+    var _profile = _profileRepository.profile;
     switch (event.status) {
       case ProfileStatus.created:
         return ProfileState.created(_profile!);

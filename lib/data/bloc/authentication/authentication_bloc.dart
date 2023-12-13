@@ -36,25 +36,29 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   _AuthenticationStatusChanged(AuthenticationStatusChanged event, Emitter<AuthenticationState> emit) {
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
+        break;
       case AuthenticationStatus.authenticated:
-        _tryGetProfile().then((profile) => profile != null ? AuthenticationState.authenticated(profile) : AuthenticationState.unauthenticated());
+        _tryGetProfile().then((profile) {
+          profile != null ?
+            emit(AuthenticationState.authenticated(profile))
+            : emit(const AuthenticationState.unauthenticated());
+        });
         break;
       default:
-        AuthenticationState.unknown();
+        emit(AuthenticationState.unknown());
     }
   }
 
   _AuthenticationLogoutRequested(AuthenticationLogoutRequested event, Emitter<AuthenticationState> emit) {
     _authenticationRepository.logOut();
-    AuthenticationState.unknown();
+    emit(AuthenticationState.unknown());
   }
 
   _AuthenticationLoginEmpty(AuthenticationLoginEmpty event, Emitter<AuthenticationState> emit) {
     _authenticationRepository.logIn().then((user) {
       _authenticationRepository.user.then((_user) {
         PreferencesProvider.getUID().then((uid) {
-          _profileRepository.update(
-            ProfileModel(
+          final _profile = ProfileModel(
               uid,
               user!.userId,
               user.created.toIso8601String(),
@@ -65,8 +69,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
               _user.email!,
               '',
               ''
-          ));
-          _mapAuthenticationStatusChangedToState(AuthenticationStatusChanged(AuthenticationStatus.authenticated));
+          );
+          _profileRepository.update(_profile);
+          emit(AuthenticationState.authenticated(_profile));
         });
       });
     });
@@ -76,8 +81,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     _authenticationRepository.logIn().then((user) {
       _authenticationRepository.user.then((_user) {
         PreferencesProvider.getUID().then((uid) {
-          _profileRepository.update(
-            ProfileModel(
+          final _profile = ProfileModel(
               uid,
               user!.userId,
               user.created.toIso8601String(),
@@ -88,8 +92,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
               _user.email!,
               '',
               ''
-          ));
-          _mapAuthenticationStatusChangedToState(AuthenticationStatusChanged(AuthenticationStatus.authenticated));
+          );
+          _profileRepository.update(_profile);
+          emit(AuthenticationState.authenticated(_profile));
         });
       });
     });
@@ -100,21 +105,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     _authenticationStatusSubscription.cancel();
     _authenticationRepository.dispose();
     return super.close();
-  }
-
-  Future<AuthenticationState> _mapAuthenticationStatusChangedToState(
-      AuthenticationStatusChanged event,
-      ) async {
-    switch (event.status) {
-      case AuthenticationStatus.unauthenticated:
-      case AuthenticationStatus.authenticated:
-        final profile = await _tryGetProfile();
-        return profile != null
-            ? AuthenticationState.authenticated(profile)
-            : const AuthenticationState.unauthenticated();
-      default:
-        return const AuthenticationState.unknown();
-    }
   }
 
   Future<ProfileModel?> _tryGetProfile() async {

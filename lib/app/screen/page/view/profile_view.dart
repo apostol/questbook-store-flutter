@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:path/path.dart';
 
 class ProfileView extends StatefulWidget {
   @override
@@ -30,7 +29,6 @@ class _ProfileView extends State<ProfileView> with SingleTickerProviderStateMixi
 
   Future uploadPic(BuildContext context) async {
     if (_image != null) {
-      String fileName = basename(_image!.path);
       try {
         setState(() {
           print("Profile Picture uploaded");
@@ -44,7 +42,6 @@ class _ProfileView extends State<ProfileView> with SingleTickerProviderStateMixi
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(title: const Text('Профиль')),
       body: Center(

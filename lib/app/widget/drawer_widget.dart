@@ -8,18 +8,15 @@ import 'package:basic/app/screen/page/contest_filter_page.dart';
 import 'package:basic/app/screen/page/user_filter_page.dart';
 import 'package:basic/app/screen/search.dart';
 import 'package:basic/app/screen/settings.dart';
-import 'package:basic/data/bloc/profile/profile_bloc.dart';
 import 'package:basic/data/models/artwork_filter_model.dart';
 import 'package:basic/data/models/asset_filter_model.dart';
 import 'package:basic/data/models/book_filter_model.dart';
 import 'package:basic/data/models/contest_filter_model.dart';
 import 'package:basic/data/models/user_filter_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DrawerWidget extends Drawer {
   Widget build(BuildContext context) {
-    final client = BlocProvider.of<ProfileBloc>(context).state.profile;
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -36,7 +33,7 @@ class DrawerWidget extends Drawer {
           // ),
           ListTile(
             title: TextButton(
-                child: Text('QuestBook.Today', textScaleFactor: 1.5),
+                child: Text('QuestBook.Today'),
                 onPressed: () =>
                     Navigator.pushReplacementNamed(context, '/home')),
             // trailing: IconButton(
