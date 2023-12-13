@@ -59,6 +59,13 @@
 - `echo 'export PATH="$ANDROID/platform-tools:$PATH"' >> $HOME/.bashrc`
 - `source $HOME/.bashrc`
 
+## Create emulator
+- `avdmanager create avd -n test-emu -k 'system-images;android-30;default;x86_64'`
+- `avdmanager list avd`
+
+## Run emulator
+- `flutter run emulator --launch test-emu`
+
 ## Install Android Studio
 [Manual](https://addshore.com/2022/01/installing-android-studio-on-wsl2-for-flutter/)
 - `mkdir -p $HOME/Downloads && cd "$_"`
