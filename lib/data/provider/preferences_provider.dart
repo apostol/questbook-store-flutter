@@ -13,10 +13,9 @@ class PreferencesProvider {
       return value;
     });
 
-  static void setFirstStart(bool _start) async => await _prefs.then((value) => value.setBool('firstStart', _start));
-  static Future<bool> getFirstStart() async => _prefs.then((value)=>Future.value(value.getBool('firstStart')));
+  static void setFirstStart(bool _start) async => (await _prefs).setBool('firstStart', _start);
+  static Future<bool?> getFirstStart() async => (await _prefs).getBool('firstStart');
 
-  static void setUID(String id) async => await _prefs.then((value) => value.setString('id', id));
-  static Future<String> getUID() async => _prefs.then((value) => Future.value(value.getString('id')));
-
+  static void setUID(String id) async => (await _prefs).setString('id', id);
+  static Future<String?> getUID() async => (await _prefs).getString('id');
 }
