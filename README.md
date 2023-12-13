@@ -46,7 +46,6 @@
 - `echo 'export PATH="$ANDROID/cmdline-tools/latest/bin:$PATH"' >> $HOME/.bashrc`
 - `source $HOME/.bashrc`
 - `sdkmanager --list`
-- `echo 'export PATH="$ANDROID/platform-tools:$PATH"' >> $HOME/.bashrc`
 
 ## Install Android SDK
 - `sdkmanager --list`
@@ -55,8 +54,10 @@
 - `sdkmanager "platforms;android-30"`
 - `sdkmanager "platform-tools"`
 - `sdkmanager "build-tools;30.0.3"`
-- `sdkmanager "system-images;android-30;default;x86_64"`
+- `sdkmanager --licenses`
 - `flutter config --android-sdk $ANDROID`
+- `echo 'export PATH="$ANDROID/platform-tools:$PATH"' >> $HOME/.bashrc`
+- `source $HOME/.bashrc`
 
 ## Install Android Studio
 [Manual](https://addshore.com/2022/01/installing-android-studio-on-wsl2-for-flutter/)
