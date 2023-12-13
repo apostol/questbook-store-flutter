@@ -2,21 +2,40 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
-
 class PreferencesProvider {
-  static Future<SharedPreferences> _prefs = SharedPreferences.getInstance()
-    .then((value) {
+  static PreferencesProvider get instance => _instance;
+  static PreferencesProvider _instance = PreferencesProvider._();
+  SharedPreferences? _sharedPreferences;
+  PreferencesProvider._() {
+    SharedPreferences.getInstance().then((value) {
+      _sharedPreferences = value;
       if (value.getBool('firstStart') == null || kDebugMode) {
         value.setBool('firstStart', false);
         setUID(Uuid().v4());
       }
-      return value;
     });
+  }
+  Future<void> get waitInit => Future.doWhile(() async {
+        if (_sharedPreferences != null) {
+          return false;
+        }
+        await Future.delayed(Duration(milliseconds: 100));
+        return _sharedPreferences == null;
+      });
 
-  static void setFirstStart(bool _start) async => await _prefs.then((value) => value.setBool('firstStart', _start));
-  static Future<bool> getFirstStart() async => _prefs.then((value)=>Future.value(value.getBool('firstStart')));
+  Future<void> setFirstStart(bool start) async {
+    await _sharedPreferences!.setBool('firstStart', start);
+  }
 
-  static void setUID(String id) async => await _prefs.then((value) => value.setString('id', id));
-  static Future<String> getUID() async => _prefs.then((value) => Future.value(value.getString('id')));
+  Future<bool?> getFirstStart() async {
+    return _sharedPreferences!.getBool('firstStart');
+  }
 
+  Future<void> setUID(String id) async {
+    await _sharedPreferences!.setString('id', id);
+  }
+
+  Future<String?> getUID() async {
+    return _sharedPreferences!.getString('id');
+  }
 }

@@ -19,8 +19,7 @@ class ProfileRepository {
   }
 
   final Provider _profileProvider;
-  ProfileRepository({ProfileProvider? profileProvider})  : _profileProvider = profileProvider ?? ProfileProvider()
-  {
+  ProfileRepository({ProfileProvider? profileProvider}) : _profileProvider = profileProvider ?? ProfileProvider() {
     read();
   }
 
@@ -28,7 +27,8 @@ class ProfileRepository {
 
   read() async {
     _lock.synchronized(() async {
-      _profile =  ProfileModel.fromJson(await _profileProvider.read<ProfileModel>(await PreferencesProvider.getUID()));
+      _profile = ProfileModel.fromJson(
+          await _profileProvider.read<ProfileModel>(await PreferencesProvider.instance.getUID() ?? ''));
       _controller.add(ProfileStatus.read);
     });
     return _profile;

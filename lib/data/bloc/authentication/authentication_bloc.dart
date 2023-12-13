@@ -14,31 +14,27 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   final ProfileRepository _profileRepository;
   late StreamSubscription<AuthenticationStatus> _authenticationStatusSubscription;
 
-  AuthenticationBloc({
-    required AuthenticationRepository authenticationRepository,
-    required ProfileRepository profileRepository })
+  AuthenticationBloc(
+      {required AuthenticationRepository authenticationRepository, required ProfileRepository profileRepository})
       : _authenticationRepository = authenticationRepository,
         _profileRepository = profileRepository,
-        super(const AuthenticationState.unknown())
-  {
+        super(const AuthenticationState.unknown()) {
     on<AuthenticationStatusChanged>(_AuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_AuthenticationLogoutRequested);
     on<AuthenticationLoginEmpty>(_AuthenticationLoginEmpty);
     on<AuthenticationLoginVK>(_AuthenticationLoginVK);
 
-    _authenticationStatusSubscription = _authenticationRepository.status.listen(
-            (status) => add(AuthenticationStatusChanged(status)),
-            cancelOnError: false
-    );
+    _authenticationStatusSubscription = _authenticationRepository.status
+        .listen((status) => add(AuthenticationStatusChanged(status)), cancelOnError: false);
     _authenticationRepository.init();
   }
-
 
   _AuthenticationStatusChanged(AuthenticationStatusChanged event, Emitter<AuthenticationState> emit) {
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
       case AuthenticationStatus.authenticated:
-        _tryGetProfile().then((profile) => profile != null ? AuthenticationState.authenticated(profile) : AuthenticationState.unauthenticated());
+        _tryGetProfile().then((profile) =>
+            profile != null ? AuthenticationState.authenticated(profile) : AuthenticationState.unauthenticated());
         break;
       default:
         AuthenticationState.unknown();
@@ -53,20 +49,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   _AuthenticationLoginEmpty(AuthenticationLoginEmpty event, Emitter<AuthenticationState> emit) {
     _authenticationRepository.logIn().then((user) {
       _authenticationRepository.user.then((_user) {
-        PreferencesProvider.getUID().then((uid) {
-          _profileRepository.update(
-            ProfileModel(
-              uid,
-              user!.userId,
-              user.created.toIso8601String(),
-              _user.name,
-              '',
-              _user.name,
-              _user.photo!,
-              _user.email!,
-              '',
-              ''
-          ));
+        PreferencesProvider.instance.getUID().then((uid) {
+          _profileRepository.update(ProfileModel(uid, user!.userId, user.created.toIso8601String(), _user.name, '',
+              _user.name, _user.photo!, _user.email!, '', ''));
           _mapAuthenticationStatusChangedToState(AuthenticationStatusChanged(AuthenticationStatus.authenticated));
         });
       });
@@ -76,20 +61,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   _AuthenticationLoginVK(AuthenticationLoginVK event, Emitter<AuthenticationState> emit) {
     _authenticationRepository.logIn().then((user) {
       _authenticationRepository.user.then((_user) {
-        PreferencesProvider.getUID().then((uid) {
-          _profileRepository.update(
-            ProfileModel(
-              uid,
-              user!.userId,
-              user.created.toIso8601String(),
-              _user.name,
-              '',
-              _user.name,
-              _user.photo!,
-              _user.email!,
-              '',
-              ''
-          ));
+        PreferencesProvider.instance.getUID().then((uid) {
+          _profileRepository.update(ProfileModel(uid, user!.userId, user.created.toIso8601String(), _user.name, '',
+              _user.name, _user.photo!, _user.email!, '', ''));
           _mapAuthenticationStatusChangedToState(AuthenticationStatusChanged(AuthenticationStatus.authenticated));
         });
       });
@@ -104,8 +78,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   }
 
   Future<AuthenticationState> _mapAuthenticationStatusChangedToState(
-      AuthenticationStatusChanged event,
-      ) async {
+    AuthenticationStatusChanged event,
+  ) async {
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
       case AuthenticationStatus.authenticated:

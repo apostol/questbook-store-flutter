@@ -7,7 +7,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 part 'profile_event.dart';
 part 'profile_state.dart';
 
@@ -15,18 +14,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileRepository _profileRepository;
   late StreamSubscription _profileStatusSubscription;
 
-  ProfileBloc(BuildContext context) :
-        _profileRepository = ProfileRepository(),
-        super(const ProfileState.unknown()){
-
+  ProfileBloc(BuildContext context)
+      : _profileRepository = ProfileRepository(),
+        super(const ProfileState.unknown()) {
     on<ProfileStatusChanged>(_ProfileStatusChanged);
     on<ProfileEventCreate>(_ProfileEventCreate);
     on<ProfileEventRead>(_ProfileEventRead);
     on<ProfileEventDelete>(_ProfileEventDelete);
     on<ProfileEventUpdate>(_ProfileEventUpdate);
-    _profileStatusSubscription = _profileRepository.status.listen(
-            (status) => add(ProfileStatusChanged(status))
-    );
+    _profileStatusSubscription = _profileRepository.status.listen((status) => add(ProfileStatusChanged(status)));
   }
 
   _ProfileStatusChanged(ProfileStatusChanged event, Emitter<ProfileState> emit) {
@@ -46,18 +42,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   _ProfileEventUpdate(ProfileEventUpdate event, Emitter<ProfileState> emit) {
-    PreferencesProvider.getUID().then((uid) {
+    PreferencesProvider.instance.getUID().then((uid) {
       final _profile = ProfileModel(
-            uid,
-            event.profile.id,
-            event.profile.registeredAt,
-            event.profile.firstName,
-            event.profile.lastName,
-            event.profile.nickName,
-            event.profile.photo,
-            event.profile.email,
-            event.profile.phone,
-            event.profile.location);
+          uid,
+          event.profile.id,
+          event.profile.registeredAt,
+          event.profile.firstName,
+          event.profile.lastName,
+          event.profile.nickName,
+          event.profile.photo,
+          event.profile.email,
+          event.profile.phone,
+          event.profile.location);
       _profileRepository.update(_profile);
       ProfileState.updated(_profile);
     });
@@ -71,9 +67,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   Future<ProfileState> _mapProfileStatusChangedToState(
-      ProfileStatusChanged event,
-      ) async {
-      var _profile = _profileRepository.profile;
+    ProfileStatusChanged event,
+  ) async {
+    var _profile = _profileRepository.profile;
     switch (event.status) {
       case ProfileStatus.created:
         return ProfileState.created(_profile!);
