@@ -66,6 +66,10 @@
 ## Run emulator
 - `flutter run emulator --launch test-emu`
 
+## Install KVM
+- [Manual](https://developer.android.com/studio/run/emulator-acceleration#vm-linux)
+- `sudo apt-get install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils`
+
 ## Install Android Studio
 [Manual](https://addshore.com/2022/01/installing-android-studio-on-wsl2-for-flutter/)
 - `mkdir -p $HOME/Downloads && cd "$_"`
