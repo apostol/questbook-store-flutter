@@ -36,7 +36,7 @@ class _ProfileView extends State<ProfileView> with SingleTickerProviderStateMixi
           print("Profile Picture uploaded");
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
         });
-      } on Exception catch (e) {
+      } on Exception {
         // e.g, e.code == 'canceled'
       }
     }

@@ -10,7 +10,7 @@ class UserModel extends Equatable {
   final String name;
   final String? photo;
 
-  const UserModel(this.id,this.email,this.name,this.photo): assert(email != null), assert(id != null);
+  const UserModel(this.id,this.email,this.name,this.photo): assert(email != null);
 
   static const UserModel empty = UserModel('0', '', '', '');
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);

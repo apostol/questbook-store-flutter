@@ -11,7 +11,7 @@ class SettingsView extends StatelessWidget {
       body: Center(
         child: BlocBuilder<SettingsCubit, int>(
           builder: (context, state) {
-            return Text('Страница находится в разработке.', style: textTheme.bodyText1);
+            return Text('Страница находится в разработке.', style: textTheme.bodyLarge);
           },
         ),
       ),

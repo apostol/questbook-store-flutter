@@ -14,11 +14,8 @@ import 'package:basic/data/models/asset_filter_model.dart';
 import 'package:basic/data/models/book_filter_model.dart';
 import 'package:basic/data/models/contest_filter_model.dart';
 import 'package:basic/data/models/user_filter_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:share/share.dart';
 
 class DrawerWidget extends Drawer {
   Widget build(BuildContext context) {
@@ -42,10 +39,10 @@ class DrawerWidget extends Drawer {
                 child: Text('QuestBook.Today', textScaleFactor: 1.5),
                 onPressed: () =>
                     Navigator.pushReplacementNamed(context, '/home')),
-            trailing: IconButton(
-                icon: Icon(Icons.share),
-                onPressed: () =>
-                    Share.share("http://itcube.online/itcube.apk")),
+            // trailing: IconButton(
+            //     icon: Icon(Icons.share),
+            //     onPressed: () =>
+            //         Share.share("http://itcube.online/itcube.apk")),
             tileColor: Colors.grey,
           ),
           ListTile(

@@ -12,7 +12,7 @@ class ChatsView extends StatelessWidget {
         child: BlocBuilder<AboutCubit, int>(
           builder: (context, state) {
             return Text('Страница находится в разработке.',
-                style: textTheme.bodyText1);
+                style: textTheme.bodyLarge);
           },
         ),
       ),

@@ -1,7 +1,6 @@
 import 'package:basic/app/screen/book_info.dart';
 import 'package:basic/data/models/book_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class BookCover extends StatelessWidget {
   final BookModel model;

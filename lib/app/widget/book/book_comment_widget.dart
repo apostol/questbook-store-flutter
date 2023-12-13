@@ -2,7 +2,6 @@ import 'package:basic/app/widget/comment/comment_tree_widget.dart';
 import 'package:basic/app/widget/comment/tree_theme_data.dart';
 import 'package:basic/data/models/comment_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../container_expansion_widget.dart';
 
@@ -71,7 +70,7 @@ class BookCommentWidget extends StatelessWidget {
                   children: [
                     Text(
                       'dangngocduc',
-                      style: Theme.of(context).textTheme.caption!.copyWith(
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           fontWeight: FontWeight.w600, color: Colors.black),
                     ),
                     SizedBox(
@@ -79,14 +78,14 @@ class BookCommentWidget extends StatelessWidget {
                     ),
                     Text(
                       '${data.content}',
-                      style: Theme.of(context).textTheme.caption!.copyWith(
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           fontWeight: FontWeight.w300, color: Colors.black),
                     ),
                   ],
                 ),
               ),
               DefaultTextStyle(
-                style: Theme.of(context).textTheme.caption!.copyWith(
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: Colors.grey[700], fontWeight: FontWeight.bold),
                 child: Padding(
                   padding: EdgeInsets.only(top: 4),
@@ -121,7 +120,7 @@ class BookCommentWidget extends StatelessWidget {
                   children: [
                     Text(
                       'dangngocduc',
-                      style: Theme.of(context).textTheme.caption!.copyWith(
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           fontWeight: FontWeight.w600, color: Colors.black),
                     ),
                     SizedBox(
@@ -129,14 +128,14 @@ class BookCommentWidget extends StatelessWidget {
                     ),
                     Text(
                       '${data.content}',
-                      style: Theme.of(context).textTheme.caption!.copyWith(
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           fontWeight: FontWeight.w300, color: Colors.black),
                     ),
                   ],
                 ),
               ),
               DefaultTextStyle(
-                style: Theme.of(context).textTheme.caption!.copyWith(
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: Colors.grey[700], fontWeight: FontWeight.bold),
                 child: Padding(
                   padding: EdgeInsets.only(top: 4),

@@ -3,7 +3,6 @@ import 'package:basic/app/screen/notifications.dart';
 import 'package:basic/app/widget/search/search_modal_bottom_sheet.dart';
 import 'package:basic/data/bloc/authentication/authentication_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends AppBar {

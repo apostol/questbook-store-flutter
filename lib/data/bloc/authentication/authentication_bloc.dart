@@ -27,8 +27,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     on<AuthenticationLoginVK>(_AuthenticationLoginVK);
 
     _authenticationStatusSubscription = _authenticationRepository.status.listen(
-            (status) => add(AuthenticationStatusChanged(status)),
-            cancelOnError: false
+            (status) => add(AuthenticationStatusChanged(status))
     );
     _authenticationRepository.init();
   }

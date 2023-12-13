@@ -1,7 +1,6 @@
 import 'package:basic/data/models/book_model.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class BookSerialWidget extends StatelessWidget {
   final BookModel model;

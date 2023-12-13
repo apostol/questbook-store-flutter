@@ -1,6 +1,5 @@
 import 'package:basic/data/models/book_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class BookTagGenreWidget extends StatelessWidget {
   BookTagGenreWidget(BookModel model);
