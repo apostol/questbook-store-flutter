@@ -34,7 +34,7 @@ class ProfileRepository {
     return _profile;
   }
 
-  update(ProfileModel model) async {
+  update(ProfileModel model) {
     _lock.synchronized(() async {
       await _profileProvider.write<ProfileModel>(model);
       _controller.add(ProfileStatus.updated);

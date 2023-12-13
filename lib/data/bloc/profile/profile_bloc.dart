@@ -18,9 +18,49 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(BuildContext context) :
         _profileRepository = ProfileRepository(),
         super(const ProfileState.unknown()){
+
+    on<ProfileStatusChanged>(_ProfileStatusChanged);
+    on<ProfileEventCreate>(_ProfileEventCreate);
+    on<ProfileEventRead>(_ProfileEventRead);
+    on<ProfileEventDelete>(_ProfileEventDelete);
+    on<ProfileEventUpdate>(_ProfileEventUpdate);
     _profileStatusSubscription = _profileRepository.status.listen(
             (status) => add(ProfileStatusChanged(status))
     );
+  }
+
+  _ProfileStatusChanged(ProfileStatusChanged event, Emitter<ProfileState> emit) {
+    _mapProfileStatusChangedToState(event);
+  }
+
+  _ProfileEventCreate(ProfileEventCreate event, Emitter<ProfileState> emit) {
+    _profileRepository.create(ProfileModel.empty).then((value) => ProfileState.created(value));
+  }
+
+  _ProfileEventRead(ProfileEventRead event, Emitter<ProfileState> emit) {
+    ProfileState.read(_profileRepository.profile!);
+  }
+
+  _ProfileEventDelete(ProfileEventDelete event, Emitter<ProfileState> emit) {
+    _profileRepository.delete(_profileRepository.profile!);
+  }
+
+  _ProfileEventUpdate(ProfileEventUpdate event, Emitter<ProfileState> emit) {
+    PreferencesProvider.getUID().then((uid) {
+      final _profile = ProfileModel(
+            uid,
+            event.profile.id,
+            event.profile.registeredAt,
+            event.profile.firstName,
+            event.profile.lastName,
+            event.profile.nickName,
+            event.profile.photo,
+            event.profile.email,
+            event.profile.phone,
+            event.profile.location);
+      _profileRepository.update(_profile);
+      ProfileState.updated(_profile);
+    });
   }
 
   @override
@@ -28,41 +68,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     _profileStatusSubscription.cancel();
     _profileRepository.dispose();
     return super.close();
-  }
-
-  @override
-  Stream<ProfileState> mapEventToState(
-    ProfileEvent event,
-  ) async* {
-    if (event is ProfileStatusChanged) {
-      yield await _mapProfileStatusChangedToState(event);
-    } else if (event is ProfileEventCreate) {
-      final _profile = await _profileRepository.create(ProfileModel.empty);
-      yield ProfileState.created(_profile);
-    } else if (event is ProfileEventRead){
-      ProfileModel? _profile = _profileRepository.profile;
-      yield ProfileState.read(_profile!);
-    } else if (event is ProfileEventUpdate){
-      final _profile = ProfileModel(
-          PreferencesProvider.getUID(),
-          event.profile.id,
-          event.profile.registeredAt,
-          event.profile.firstName,
-          event.profile.lastName,
-          event.profile.nickName,
-          event.profile.photo,
-          event.profile.email,
-          event.profile.phone,
-          event.profile.location);
-      await _profileRepository.update(_profile);
-      yield ProfileState.updated(_profile);
-    } else if (event is ProfileEventDelete){
-      ProfileModel? _profile = _profileRepository.profile;
-      await _profileRepository.delete(_profile!);
-      yield ProfileState.deleted(_profile);
-    } else {
-      yield ProfileState.unknown();
-    }
   }
 
   Future<ProfileState> _mapProfileStatusChangedToState(

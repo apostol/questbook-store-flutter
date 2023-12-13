@@ -21,58 +21,80 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         _profileRepository = profileRepository,
         super(const AuthenticationState.unknown())
   {
+    on<AuthenticationStatusChanged>(_AuthenticationStatusChanged);
+    on<AuthenticationLogoutRequested>(_AuthenticationLogoutRequested);
+    on<AuthenticationLoginEmpty>(_AuthenticationLoginEmpty);
+    on<AuthenticationLoginVK>(_AuthenticationLoginVK);
+
     _authenticationStatusSubscription = _authenticationRepository.status.listen(
-            (status) => add(AuthenticationStatusChanged(status))
+            (status) => add(AuthenticationStatusChanged(status)),
+            cancelOnError: false
     );
     _authenticationRepository.init();
   }
 
-  @override
-  Stream<AuthenticationState> mapEventToState(
-      AuthenticationEvent event,
-      ) async* {
-    if (event is AuthenticationStatusChanged) {
-      yield await _mapAuthenticationStatusChangedToState(event);
-    } else if (event is AuthenticationLogoutRequested) {
-      _authenticationRepository.logOut();
-    } else if (event is AuthenticationLoginEmpty) {
-      var user = await _authenticationRepository.logIn();
-      var _user = await _authenticationRepository.user;
-      var _profile = ProfileModel(
-          await PreferencesProvider.getUID(),
-          user!.userId,
-          user.created.toIso8601String(),
-          _user.name,
-          '',
-          _user.name,
-          _user.photo!,
-          _user.email!,
-          '',
-          ''
-      );
-      await _profileRepository.update(_profile);
-      yield await _mapAuthenticationStatusChangedToState(
-          AuthenticationStatusChanged(AuthenticationStatus.authenticated));
-    } else if (event is AuthenticationLoginVK) {
-      var user = await _authenticationRepository.logIn();
-      var _user = await _authenticationRepository.user;
-      var _profile = ProfileModel(
-          await PreferencesProvider.getUID(),
-          user!.userId,
-          user.created.toIso8601String(),
-          _user.name,
-          '',
-          _user.name,
-          _user.photo!,
-          _user.email!,
-          '',
-          ''
-      );
-      await _profileRepository.update(_profile);
-      yield await _mapAuthenticationStatusChangedToState(
-          AuthenticationStatusChanged(AuthenticationStatus.authenticated));
+
+  _AuthenticationStatusChanged(AuthenticationStatusChanged event, Emitter<AuthenticationState> emit) {
+    switch (event.status) {
+      case AuthenticationStatus.unauthenticated:
+      case AuthenticationStatus.authenticated:
+        _tryGetProfile().then((profile) => profile != null ? AuthenticationState.authenticated(profile) : AuthenticationState.unauthenticated());
+        break;
+      default:
+        AuthenticationState.unknown();
     }
-}
+  }
+
+  _AuthenticationLogoutRequested(AuthenticationLogoutRequested event, Emitter<AuthenticationState> emit) {
+    _authenticationRepository.logOut();
+    AuthenticationState.unknown();
+  }
+
+  _AuthenticationLoginEmpty(AuthenticationLoginEmpty event, Emitter<AuthenticationState> emit) {
+    _authenticationRepository.logIn().then((user) {
+      _authenticationRepository.user.then((_user) {
+        PreferencesProvider.getUID().then((uid) {
+          _profileRepository.update(
+            ProfileModel(
+              uid,
+              user!.userId,
+              user.created.toIso8601String(),
+              _user.name,
+              '',
+              _user.name,
+              _user.photo!,
+              _user.email!,
+              '',
+              ''
+          ));
+          _mapAuthenticationStatusChangedToState(AuthenticationStatusChanged(AuthenticationStatus.authenticated));
+        });
+      });
+    });
+  }
+
+  _AuthenticationLoginVK(AuthenticationLoginVK event, Emitter<AuthenticationState> emit) {
+    _authenticationRepository.logIn().then((user) {
+      _authenticationRepository.user.then((_user) {
+        PreferencesProvider.getUID().then((uid) {
+          _profileRepository.update(
+            ProfileModel(
+              uid,
+              user!.userId,
+              user.created.toIso8601String(),
+              _user.name,
+              '',
+              _user.name,
+              _user.photo!,
+              _user.email!,
+              '',
+              ''
+          ));
+          _mapAuthenticationStatusChangedToState(AuthenticationStatusChanged(AuthenticationStatus.authenticated));
+        });
+      });
+    });
+  }
 
   @override
   Future<void> close() {

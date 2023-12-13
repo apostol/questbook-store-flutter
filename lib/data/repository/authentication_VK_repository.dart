@@ -18,13 +18,13 @@ class AuthenticationVKRepository extends AuthenticationRepository {
     yield* _controller.stream;
   }
 
-  AuthenticationVKRepository() : _vk = VKLogin()
+  AuthenticationVKRepository() : _vk = VKLogin(debug:true)
   {
     init();
   }
 
   Future<Result<bool>> init() async {
-    var result = await _vk.initSdk(_appId);
+    var result = await _vk.initSdk();
     var isLogged = await _vk.isLoggedIn;
     if (isLogged)
       _controller.add(AuthenticationStatus.authenticated);

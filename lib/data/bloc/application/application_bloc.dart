@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:basic/data/models/application_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +11,4 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationModel> {
   ApplicationBloc(BuildContext context) :
     super(ApplicationModel.empty);
 
-  @override
-  Stream<ApplicationModel> mapEventToState(ApplicationEvent event) async* {
-
-  }
 }
