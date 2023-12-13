@@ -15,8 +15,7 @@ class ContainerExpansionWidget extends StatefulWidget {
   final String? trimCollapsedText;
 
   @override
-  _ContainerExpansionWidgetState createState() =>
-      _ContainerExpansionWidgetState();
+  _ContainerExpansionWidgetState createState() => _ContainerExpansionWidgetState();
 }
 
 class _ContainerExpansionWidgetState extends State<ContainerExpansionWidget>
@@ -27,20 +26,17 @@ class _ContainerExpansionWidgetState extends State<ContainerExpansionWidget>
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
       AnimatedSize(
-          vsync: this,
+          // vsync: this,
           duration: const Duration(milliseconds: 500),
           child: ConstrainedBox(
-            constraints: isExpanded
-                ? BoxConstraints()
-                : BoxConstraints(maxHeight: widget.maxHeight),
+            constraints: isExpanded ? BoxConstraints() : BoxConstraints(maxHeight: widget.maxHeight),
             child: widget.text,
           )),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           TextButton(
-              child: Text(
-                  '${isExpanded ? widget.trimExpandedText : widget.trimCollapsedText}',
+              child: Text('${isExpanded ? widget.trimExpandedText : widget.trimCollapsedText}',
                   style: TextStyle(color: Colors.green)),
               onPressed: () => setState(() => isExpanded = !isExpanded))
         ],
