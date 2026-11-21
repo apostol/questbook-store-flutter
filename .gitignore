@@ -9,6 +9,9 @@
 .history
 .svn/
 migrate_working_dir/
+/.agai/config.json
+/.agai/config.json.bak
+/.agai/tmp/
 
 # IntelliJ related
 *.iml
