@@ -10,7 +10,7 @@ yougile:
   - epic
   yougile_updated: 1795305312748
   completed: false
-  description_hash: 08f64493c1bc4655f3ea104700a6e7df974ba0e37f1872db48555d394ec689e1
+  description_hash: 85defcb8d9762f3e87c01ab6ebb26ea786bbdba0b71f2529e49b3c1c3fb43d39
   deleted: false
   deadline:
     startDate: 1795287600000
@@ -47,11 +47,16 @@ yougile:
       timestamp: 1795370001453
       by: e07d0352-77e1-41de-bf4b-733ddd1ce964
       withTime: false
+    - deadline: 1796410800000
+      startDate: 1795287600000
+      timestamp: 1795370377538
+      by: e07d0352-77e1-41de-bf4b-733ddd1ce964
+      withTime: false
     blockedPoints: []
     links: []
   subtasks:
   - c96738a6-c75b-46c5-bcbf-4453a97c389e
-synced_at: '2026-11-22T17:59:37Z'
+synced_at: '2026-11-22T18:05:56Z'
 pending: none
 estimate:
   effort_days: 10.5
@@ -64,8 +69,19 @@ docs:
   - docs/artifacts/specs/SPEC-QUE-001-guest-interactive-story.md
   epic-analysis:
   - docs/artifacts/analysis/epic-QUE-1.md
+  requirements:
+  - docs/artifacts/project/requirements.md
+  adr:
+  - docs/decisions/2026-11-22-nfr-thresholds-and-target-platform.md
 children:
 - c96738a6-c75b-46c5-bcbf-4453a97c389e
+requirements:
+- REQ-QUE-001
+- REQ-QUE-002
+- REQ-QUE-003
+- REQ-QUE-004
+- REQ-QUE-005
+- REQ-QUE-006
 ---
 
 # [QUE-1] QuestBook.today — гостевое прохождение интерактивной истории
@@ -146,7 +162,17 @@ children:
 
 ## Документы
 - Анализ эпика: docs/artifacts/analysis/epic-QUE-1.md
+- ADR: docs/decisions/2026-11-22-nfr-thresholds-and-target-platform.md
+- Требования: docs/artifacts/project/requirements.md
 - Спецификация: docs/artifacts/specs/SPEC-QUE-001-guest-interactive-story.md
+
+## Требования
+- REQ-QUE-001
+- REQ-QUE-002
+- REQ-QUE-003
+- REQ-QUE-004
+- REQ-QUE-005
+- REQ-QUE-006
 
 ## Ссылки
 Вверх: —

@@ -1,5 +1,54 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-21",
-  "entries": []
+  "updated": "2026-11-22",
+  "entries": [
+    {
+      "id": "REQ-QUE-001",
+      "uid": "0be4bec4-5a63-4164-b0c6-089b60d676b3",
+      "repo": "questbook-store-flutter",
+      "title": "Холодный запуск до первого фрагмента",
+      "created": "2026-11-22",
+      "source": "new"
+    },
+    {
+      "id": "REQ-QUE-002",
+      "uid": "0c3bffb6-2a58-4506-903e-22e73ae2a777",
+      "repo": "questbook-store-flutter",
+      "title": "Переход между фрагментами",
+      "created": "2026-11-22",
+      "source": "new"
+    },
+    {
+      "id": "REQ-QUE-003",
+      "uid": "7ecfd79b-f544-4d28-b97d-f2f433b6bfff",
+      "repo": "questbook-store-flutter",
+      "title": "Сохранность прогресса после перезапуска",
+      "created": "2026-11-22",
+      "source": "new"
+    },
+    {
+      "id": "REQ-QUE-004",
+      "uid": "91fa8052-deca-49dd-8da0-e8f666789fa2",
+      "repo": "questbook-store-flutter",
+      "title": "Совместимость прогресса при смене версии",
+      "created": "2026-11-22",
+      "source": "new"
+    },
+    {
+      "id": "REQ-QUE-005",
+      "uid": "58ece73c-0990-48ec-b5f8-4d4d73e18ed3",
+      "repo": "questbook-store-flutter",
+      "title": "Работа гостевого сценария без сети",
+      "created": "2026-11-22",
+      "source": "new"
+    },
+    {
+      "id": "REQ-QUE-006",
+      "uid": "524f592b-0b63-4766-9276-b6faba4af693",
+      "repo": "questbook-store-flutter",
+      "title": "Целевая платформа первого среза — Android",
+      "created": "2026-11-22",
+      "source": "new"
+    }
+  ]
 }

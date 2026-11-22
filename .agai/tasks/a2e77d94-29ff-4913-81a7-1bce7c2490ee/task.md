@@ -11,7 +11,7 @@ yougile:
   - ba
   yougile_updated: 1795369605932
   completed: false
-  description_hash: 06deb8f2b882ef36a5dfa1c71441a0d35ad1d36e9c488373d56e426ac5ab9ba2
+  description_hash: a2761efc9ceab52335026f4a99e2d5466d4963064f7112b618798ce728e963b3
   deleted: false
   deadline:
     startDate: 1795287600000
@@ -28,10 +28,15 @@ yougile:
       timestamp: 1795370001055
       by: e07d0352-77e1-41de-bf4b-733ddd1ce964
       withTime: false
+    - deadline: 1795374000000
+      startDate: 1795287600000
+      timestamp: 1795370331560
+      by: e07d0352-77e1-41de-bf4b-733ddd1ce964
+      withTime: false
     blockedPoints: []
     links: []
   subtasks: []
-synced_at: '2026-11-22T17:58:52Z'
+synced_at: '2026-11-22T18:11:14Z'
 pending: none
 estimate:
   effort_days: 1.25
@@ -43,6 +48,13 @@ children: []
 schedule:
   start: '2026-11-22'
   deadline: '2026-11-23'
+requirements:
+- REQ-QUE-001
+- REQ-QUE-002
+- REQ-QUE-003
+- REQ-QUE-004
+- REQ-QUE-005
+- REQ-QUE-006
 ---
 
 # [QUE-4] BA: анализ истории QUE-3 — гостевое прохождение и локальное продолжение
@@ -93,6 +105,14 @@ schedule:
 
 ## Журнал работы агента
 <!-- Добавляй отчёты о выполненной работе по общему шаблону, не удаляя предыдущие записи -->
+
+## Требования
+- REQ-QUE-001
+- REQ-QUE-002
+- REQ-QUE-003
+- REQ-QUE-004
+- REQ-QUE-005
+- REQ-QUE-006
 
 ## Ссылки
 Вверх:

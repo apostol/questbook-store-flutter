@@ -12,6 +12,7 @@ migrate_working_dir/
 /.agai/config.json
 /.agai/config.json.bak
 /.agai/tmp/
+/.agai/requirements/
 
 # IntelliJ related
 *.iml
