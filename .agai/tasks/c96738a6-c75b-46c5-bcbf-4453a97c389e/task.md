@@ -10,7 +10,7 @@ yougile:
   - feature
   yougile_updated: 1795306112642
   completed: false
-  description_hash: 8c1e773f2a307231ae6c17da82747ed9c098ae66ae7a69fd6ce061be8fa9a922
+  description_hash: e87e4d743516dc4b1cfc9f82bc5bdf6a1e749e469b528b5355818d2892105dec
   deleted: false
   deadline:
     startDate: 1795287600000
@@ -22,11 +22,37 @@ yougile:
       timestamp: 1795306538229
       by: e07d0352-77e1-41de-bf4b-733ddd1ce964
       withTime: false
+    - deadline: 1796410800000
+      startDate: 1795287600000
+      timestamp: 1795306538229
+      by: e07d0352-77e1-41de-bf4b-733ddd1ce964
+      withTime: false
+    - deadline: 1796410800000
+      startDate: 1795287600000
+      timestamp: 1795370002940
+      by: e07d0352-77e1-41de-bf4b-733ddd1ce964
+      withTime: false
+    - deadline: 1796410800000
+      startDate: 1795287600000
+      timestamp: 1795370071317
+      by: e07d0352-77e1-41de-bf4b-733ddd1ce964
+      withTime: false
+    - deadline: 1796410800000
+      startDate: 1795287600000
+      timestamp: 1795370333008
+      by: e07d0352-77e1-41de-bf4b-733ddd1ce964
+      withTime: false
+    - deadline: 1796410800000
+      startDate: 1795287600000
+      timestamp: 1795370520800
+      by: e07d0352-77e1-41de-bf4b-733ddd1ce964
+      withTime: false
     blockedPoints: []
     links: []
-  subtasks: []
-synced_at: '2026-11-22T00:15:37Z'
-pending: update
+  subtasks:
+  - 432a7eda-1ca8-4289-9491-e50dd8939ec5
+synced_at: '2026-11-22T18:06:00Z'
+pending: none
 estimate:
   effort_days: 10.5
   duration_days: 14
@@ -40,9 +66,23 @@ schedule:
 docs:
   spec:
   - docs/artifacts/specs/SPEC-ID-001-guest-test-story-progress.md
+  adr:
+  - docs/decisions/2026-11-22-bundled-test-story-content.md
+  - docs/decisions/2026-11-22-behavior-after-ending.md
+  - docs/decisions/2026-11-22-corrupt-progress-behavior.md
+  - docs/decisions/2026-11-22-nfr-and-target-platforms.md
+  - docs/decisions/2026-11-22-product-metric-deferred.md
+  - docs/decisions/2026-11-22-no-public-launch.md
+requirements:
+- REQ-QUE-001
+- REQ-QUE-002
+- REQ-QUE-003
+- REQ-QUE-004
+- REQ-QUE-005
+- REQ-QUE-006
 ---
 
-# [ID-901] Гостевое прохождение тестовой истории и локальное продолжение
+# [QUE-2] Гостевое прохождение тестовой истории и локальное продолжение
 
 ## Проблема (в границах компонента)
 В границах компонента гость должен иметь возможность пройти одну встроенную интерактивную историю без регистрации и продолжить её на той же установке. Epic описывает это как продуктовую гипотезу; текущее поведение и частота потребности отдельно не измерены.
@@ -72,8 +112,163 @@ docs:
 ## Журнал работы агента
 <!-- Добавляй отчёты о выполненной работе по общему шаблону, не удаляя предыдущие записи -->
 
+### Задача
+
+- Репозиторий: `apostol/questbook-store-flutter`
+- ID и ссылка: `QUE-2` / YouGile UUID `c96738a6-c75b-46c5-bcbf-4453a97c389e`
+- Название: Гостевое прохождение тестовой истории и локальное продолжение
+- Статус до / после: backlog / backlog; статус не менялся
+- Сессия: ID недоступен
+
+### Участники
+
+| Плагин | Агент или скил | Участие |
+|---|---|---|
+| agai-ba | business-analyst, features, elicit, scenarios, data, rules, nfr, review, stories, story-spec | Анализ Feature QUE-2, разбор истории QUE-3, документ истории, реестры, спецификация |
+| agai-sdlc | context, task-sync, records, spec, templates, gate | Контекст, записи QUE-3 и QUE-4, спецификация SPEC-QUE-002, проверки и ворота |
+| yougile | yougile-sync | Отчёт синхронизации, разрешение пустых удалённых версий, push |
+
+### Время и использование
+
+- Начало / завершение: 2026-11-22 около 22:37 +05 / около 22:55 +05
+- Активное время: около 15 минут (оценка; точный трекер пауз недоступен)
+- Токены: недоступны; атрибуция к задаче отсутствует, агрегат сессии не получен
+- Стоимость: недоступна (фактических billing-данных нет)
+- Источники метрик: `.agai/metrics/sessions/` отсутствует; ID сессии не предоставлен
+
+### Итог и доказательства
+
+- Ворота BA до начала работы: `gate.py ba --record c96738a6-c75b-46c5-bcbf-4453a97c389e` и то же для Epic `bbcd25c4-7c97-49f2-a7ef-ac6cb5f93be3` — `ready: true`, `problems: []`.
+- Создана User Story `QUE-3` (UUID `432a7eda-1ca8-4289-9491-e50dd8939ec5`) с родителем QUE-2; оценка 6.5 человеко-дней / 9 календарных дней по ожиданию PERT (рекомендованный вариант); статус backlog.
+- Разбор истории: `docs/artifacts/analysis/432a7eda-1ca8-4289-9491-e50dd8939ec5.md`; `analysis_check.py`: `valid: true`.
+- Бизнес-правила BR-1…BR-8 и глоссарий на 9 терминов: `docs/artifacts/rules.md`, `docs/artifacts/glossary.md`; `domain_check.py`: `valid: true`, `terms: 9`, `rules: 8`.
+- Численные NFR не заявлены: источники их не определяют, пороги не выдумывались; `nfr_check.py`: `valid: true` с предупреждением «НФТ не заявлены».
+- Документ истории: `docs/artifacts/stories/QUE-3-guest-test-story-local-continue.md`; `story_doc_check.py`: `valid: true`.
+- Аналитика в задаче `QUE-4` (UUID `a2e77d94-29ff-4913-81a7-1bce7c2490ee`): разделы собраны из разбора; `readiness.py`: `valid: true`, предупреждение о незаявленных НФТ.
+- Спецификация `SPEC-QUE-002`: `docs/artifacts/specs/SPEC-QUE-002-guest-test-story-local-continue.md`; `spec_check.py`: `valid: true`. Ворота `story-spec`, `ba`, `sa`, `qa-spec` по QUE-3 — `ready: true`; предупреждение «нет ссылки на требование»: реестр требований проекта пуст.
+- Бизнес-анализ эпика: `docs/artifacts/analysis/epic-QUE-1.md`, привязан к QUE-1; `epic_analysis_check.py`: `valid: true`.
+- `record_validate.py`: QUE-1, QUE-3, QUE-4 — `valid: true`. QUE-2 — `valid: false` из-за существующего до работы расхождения: заголовок `[ID-901]` при `short_id` QUE-2 («нет заголовка с префиксом [QUE-2]»); запись принадлежит Project Owner, молча не исправлялась.
+- `gate.py flow --story 432a7eda-…`: `spec`, `ba`, `sa`, `qa_spec` — true; `dev` — false только из-за отсутствия утверждённых QA критериев и задачи SA. Реализация не начиналась.
+- YouGile: `sync report` после push — `records: 4`, `pending: []`, `conflicts: []`, `problems: []`; push отправлены QUE-1, QUE-2, QUE-3, QUE-4, ошибок 0. Удалённо проверено: QUE-3 — заголовок `[QUE-3]`, колонка 79db4c6f-27e3-40e4-9370-4b235f99c94e, подзадача QUE-4; QUE-2 — подзадача QUE-3; QUE-1 — подзадача QUE-2.
+
+### Открытые вопросы и дальнейшие действия
+
+- Вопросы переданы Project Owner через `agai-dispatcher` (durable-воркер `b0b424`, sessionId `1385bc9e-598f-4f5f-af95-b1453db7393c`); доставка подтверждена, адресат сообщение ещё не прочитал. Вопросы: содержание тестовой истории; поведение после концовки; поведение при повреждённом прогрессе; численные NFR и целевые платформы; продуктовая метрика; разрешение публичного запуска и коммерческих обещаний.
+- QA утверждает критерии приёмки и переносит их в запись истории; без этого ворота dev не откроются.
+- SA создаёт задачу `sa` и архитектурное описание, включая технический формат локального хранения.
+- Project Owner решает, когда переводить QUE-3 из backlog в todo, и устраняет расхождение заголовка QUE-2 (`[ID-901]` при коротком id QUE-2).
+
+### Запись о работе над задачей
+
+#### Задача
+- Репозиторий: `apostol/questbook-store-flutter`
+- ID и ссылка: `QUE-2` / YouGile UUID `c96738a6-c75b-46c5-bcbf-4453a97c389e`
+- Название: Гостевое прохождение тестовой истории и локальное продолжение
+- Статус до / после: backlog / backlog; статус не менялся
+- Сессия: ID недоступен
+
+#### Участники
+| Плагин | Агент или скил | Участие |
+|---|---|---|
+| agai-project | Project Owner | Ответы на шесть открытых вопросов BA, содержание встроенной тестовой истории, продуктовые границы |
+| agai-sdlc | context, decide, docs, records, spec, message-dispatch | Контекст, записи решений, проверка ворот спецификации Feature, передача NFR владельцу требований |
+
+#### Время и использование
+- Начало / завершение: 2026-11-22 около 23:10 +05 / около 23:35 +05
+- Активное время: около 25 минут по длительности сессии; отдельный точный трекер пауз недоступен
+- Токены: недоступны; атрибуция к задаче и участникам отсутствует, агрегат сессии не получен
+- Стоимость: недоступна (фактических billing-данных нет)
+- Источники метрик: локальный `.agai/metrics/sessions/` отсутствует; ID сессии не предоставлен
+
+#### Итог и доказательства
+Приняты ответы на шесть открытых вопросов BA шестью записями решений в `docs/decisions/` (все `status: accepted`, `decision_check.py`: valid=true): содержание встроенной тестовой истории — `2026-11-22-bundled-test-story-content.md`; поведение после концовки — `2026-11-22-behavior-after-ending.md`; поведение при недоступном/повреждённом/несовместимом прогрессе — `2026-11-22-corrupt-progress-behavior.md`; порядок для NFR и целевых платформ — `2026-11-22-nfr-and-target-platforms.md`; продуктовая метрика — `2026-11-22-product-metric-deferred.md`; публичный запуск — `2026-11-22-no-public-launch.md`. Контент истории — `docs/artifacts/content/QUE-BUNDLED-001-kniga-kotoruyu-nikto-ne-otkryval.md` (3 фрагмента, одно ветвление, одна концовка с двумя вариантами текста). Спецификация `SPEC-ID-001` обновлена: добавлены User Story QUE-3 и SPEC-QUE-002, ссылки на решения, обновлены открытые вопросы и история изменений. `gate.py feature-spec`: ready=true. Реализация не начиналась; Feature остаётся в backlog.
+
+#### Открытые вопросы и дальнейшие действия
+- Численные NFR и целевые платформы переданы владельцу требований через `agai-project:project-manager`; до фиксации Feature не переводится в todo (`2026-11-22-nfr-and-target-platforms.md`).
+- Продуктовая метрика остаётся открытой до появления `business-case.md`; числа не вводятся (`2026-11-22-product-metric-deferred.md`).
+- Публичный запуск, коммерческие обещания, платежи и выплаты остаются вне среза (`2026-11-22-no-public-launch.md`).
+- BA переносит ответы по контенту, концовке и повреждённому прогрессу в документ истории и `SPEC-QUE-002`; QA утверждает критерии приёмки, включая повторный старт после концовки и путь отказа прогресса.
+- Синхронизация записей с YouGile не выполнялась в этой работе; pending-состояния остаются за BA/следующим этапом.
+
+### Исправление заголовка записи
+
+Заголовок Feature исправлен с `[ID-901]` на `[QUE-2]`: расхождение с `yougile.short_id` отмечено BA и относилось к Project Owner. `record_validate.py` после исправления — `valid: true`. Правка касается только префикса заголовка; содержание Feature, спецификации и связи не менялись.
+
+### Дополнение: решения Project Owner перенесены в BA-артефакты
+
+- Project Owner принял шесть решений от 2026-11-22 в `docs/decisions/`: контент QUE-BUNDLED-001, показ концовки и повторный старт, путь отказа прогресса, порядок NFR и целевых платформ, отсрочка продуктовой метрики, запрет публичного запуска и коммерческих обещаний. `decision_check.py`: `valid: true`, 6 записей, проблем нет.
+- Контент истории `docs/artifacts/content/QUE-BUNDLED-001-kniga-kotoruyu-nikto-ne-otkryval.md` принят Project Owner: три фрагмента, одно ветвление с двумя вариантами, одна концовка с двумя вариантами текста, только текст.
+- Документ истории QUE-3 обновлён: основной сценарий 7 шагов, потоки показа достигнутой концовки, действия «Пройти заново» и восстановления после недоступного, повреждённого или несовместимого прогресса; критерии AC-1…AC-6 предложены QA.
+- `SPEC-QUE-002` обновлена: добавлены USR-007…USR-011 и AC-4…AC-6, прослеживаемость на шесть решений и контент; публичный запуск и коммерческие обещания отмечены запрещёнными.
+- Реестр правил: BR-9…BR-13; всего 13 действующих правил, глоссарий — 9 терминов. BA-задача QUE-4 пересобрана из обновлённого разбора; анализ эпика QUE-1 обновлён.
+- Открытыми остаются только численные NFR и целевые платформы (блокируют перевод Feature в todo; переданы владельцу требований через Project Manager) и продуктовая метрика (до `business-case.md`, срез не блокирует). Технический формат хранения — SA.
+- Проверки после переноса: `analysis_check`, `story_doc_check`, `spec_check`, `readiness`, `epic_analysis_check`, `decision_check`, `record_validate` (QUE-1, QUE-2, QUE-3, QUE-4), `links_check` — `valid: true`; ворота `story-spec`, `ba`, `sa`, `qa-spec`, `feature-spec` — `ready: true`.
+- YouGile: `sync report` — `records: 4`, `pending: []`, `conflicts: []`, `problems: []`; удалённая QUE-3 содержит обновлённые сценарии и DoD, заголовок Feature — `[QUE-2]`. Project Owner исправил заголовок записи и обновил SPEC-ID-001; `record_validate.py` по QUE-2 — `valid: true`.
+- Изменения закоммичены в ветку `worktree-ba-que-3`, коммит `8d43c95`; включены решения и контент Project Owner. В удалённый git не пушилось. Реализация не начиналась; Feature остаётся в backlog до фиксации NFR и платформ.
+
+### Численные NFR и целевая платформа (Project Manager)
+
+#### Задача
+- Репозиторий: `apostol/questbook-store-flutter`
+- ID и ссылка: `QUE-2` / YouGile UUID `c96738a6-c75b-46c5-bcbf-4453a97c389e`
+- Название: Гостевое прохождение тестовой истории и локальное продолжение
+- Статус до / после: backlog / backlog; статус не менялся
+- Сессия: долгоживущий воркер Project Manager
+
+#### Участники
+| Плагин | Агент или скил | Участие |
+|---|---|---|
+| agai-project | Project Manager, requirements | Численные NFR, целевая платформа, реестр требований проекта |
+| agai-sdlc | records, requirements, gate, templates | REQ-файлы, реестр, связь эпика, проверки |
+
+#### Время и использование
+- Начало / завершение: 2026-11-22 около 22:59 +05 / 23:04 +05
+- Активное время: около 5 минут; точный трекер пауз недоступен
+- Токены и стоимость: недоступны; атрибуция к задаче отсутствует
+
+#### Итог и доказательства
+- Созданы требования `REQ-QUE-001…006` в `docs/artifacts/requirements/QUE/`:
+  NFR-001 холодный запуск ≤ 3,0 с (5 из 5); NFR-002 переход ≤ 0,5 с (10 из 10);
+  NFR-003 сохранность 10/10 обычных закрытий и 10/10 принудительных остановок;
+  NFR-004 совместимость 100% из 3 состояний при обновлении N → N+1;
+  NFR-005 работа без сети — 100% шагов, 0 обязательных запросов;
+  constraint-006 — целевая платформа Android API 30, остальные платформы вне среза.
+- Значения — приёмочные границы первого среза, а не измеренный baseline; источник делегирования —
+  `docs/decisions/2026-11-22-nfr-and-target-platforms.md`; собственное решение —
+  `docs/decisions/2026-11-22-nfr-thresholds-and-target-platform.md`.
+- Реестр требований проекта: `docs/artifacts/project/requirements.md`.
+- `SPEC-ID-001` обновлена: NFR-таблица заменена шестью проверяемыми порогами, блокер перевода
+  Feature в todo отмечен решённым, версия 3, автор Project Manager.
+- Эпик QUE-1 связан с `REQ-QUE-001…006`; `record_validate.py` — valid=true; `links_check.py` —
+  valid=true, records=4, requirements=6; `gate.py requirements` — ready=true; `gate.py pjm` —
+  ready=true, problems=[], warnings=[]; `gate.py epic-spec` — ready=true; `gate.py feature-spec`
+  и `gate.py ba` по QUE-2 — ready=true.
+- `requirements check --mode enforce` — valid=true, errors=0, warnings=0;
+  `requirements registry check` — entries=6, missing=[], conflicts=[].
+
+#### Открытые вопросы и дальнейшие действия
+- BA переносит численные NFR и платформу в `SPEC-QUE-002` и документ истории QUE-3.
+- QA создаёт тестовые задачи на `REQ-QUE-001…006` и утверждает критерии приёмки AC-1…AC-6.
+- Project Owner переводит QUE-2 из backlog в todo после переноса порогов в спецификацию истории.
+- Устав проекта `docs/artifacts/project/charter.md` отсутствует; это отдельный пробел, не
+  блокирующий NFR первого среза.
+
 ## Документы
+- ADR: docs/decisions/2026-11-22-bundled-test-story-content.md
+- ADR: docs/decisions/2026-11-22-behavior-after-ending.md
+- ADR: docs/decisions/2026-11-22-corrupt-progress-behavior.md
+- ADR: docs/decisions/2026-11-22-nfr-and-target-platforms.md
+- ADR: docs/decisions/2026-11-22-product-metric-deferred.md
+- ADR: docs/decisions/2026-11-22-no-public-launch.md
 - Спецификация: docs/artifacts/specs/SPEC-ID-001-guest-test-story-progress.md
+
+## Требования
+- REQ-QUE-001
+- REQ-QUE-002
+- REQ-QUE-003
+- REQ-QUE-004
+- REQ-QUE-005
+- REQ-QUE-006
 
 ## Ссылки
 Вверх:
