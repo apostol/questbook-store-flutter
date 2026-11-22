@@ -26,13 +26,14 @@ yougile:
     links: []
   subtasks: []
 synced_at: '2026-11-22T00:15:37Z'
-pending: none
+pending: update
 estimate:
   effort_days: 10.5
   duration_days: 14
 parent: bbcd25c4-7c97-49f2-a7ef-ac6cb5f93be3
 component: Гостевой читатель истории и локальный прогресс
-children: []
+children:
+- 432a7eda-1ca8-4289-9491-e50dd8939ec5
 schedule:
   start: '2026-11-22'
   deadline: '2026-12-05'
@@ -77,4 +78,5 @@ docs:
 ## Ссылки
 Вверх:
 - Epic: QUE-1 — QuestBook.today — гостевое прохождение интерактивной истории (bbcd25c4-7c97-49f2-a7ef-ac6cb5f93be3)
-Вниз: —
+Вниз:
+- User Story: QUE-3 — Гость проходит тестовую историю и продолжает её на том же устройстве (432a7eda-1ca8-4289-9491-e50dd8939ec5)
