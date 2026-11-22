@@ -10,7 +10,7 @@ yougile:
   - feature
   yougile_updated: 1795306112642
   completed: false
-  description_hash: bcbd45aa87076f22747a780a9408070162c31e649542f55676a019f78ba402a3
+  description_hash: 1dcca10cadbc584affb59e933c0c6456239cced0f72c77847d0f2d00b09affec
   deleted: false
   deadline:
     startDate: 1795287600000
@@ -37,11 +37,16 @@ yougile:
       timestamp: 1795370071317
       by: e07d0352-77e1-41de-bf4b-733ddd1ce964
       withTime: false
+    - deadline: 1796410800000
+      startDate: 1795287600000
+      timestamp: 1795370333008
+      by: e07d0352-77e1-41de-bf4b-733ddd1ce964
+      withTime: false
     blockedPoints: []
     links: []
   subtasks:
   - 432a7eda-1ca8-4289-9491-e50dd8939ec5
-synced_at: '2026-11-22T17:58:53Z'
+synced_at: '2026-11-22T18:02:00Z'
 pending: none
 estimate:
   effort_days: 10.5
@@ -176,6 +181,18 @@ docs:
 ### Исправление заголовка записи
 
 Заголовок Feature исправлен с `[ID-901]` на `[QUE-2]`: расхождение с `yougile.short_id` отмечено BA и относилось к Project Owner. `record_validate.py` после исправления — `valid: true`. Правка касается только префикса заголовка; содержание Feature, спецификации и связи не менялись.
+
+### Дополнение: решения Project Owner перенесены в BA-артефакты
+
+- Project Owner принял шесть решений от 2026-11-22 в `docs/decisions/`: контент QUE-BUNDLED-001, показ концовки и повторный старт, путь отказа прогресса, порядок NFR и целевых платформ, отсрочка продуктовой метрики, запрет публичного запуска и коммерческих обещаний. `decision_check.py`: `valid: true`, 6 записей, проблем нет.
+- Контент истории `docs/artifacts/content/QUE-BUNDLED-001-kniga-kotoruyu-nikto-ne-otkryval.md` принят Project Owner: три фрагмента, одно ветвление с двумя вариантами, одна концовка с двумя вариантами текста, только текст.
+- Документ истории QUE-3 обновлён: основной сценарий 7 шагов, потоки показа достигнутой концовки, действия «Пройти заново» и восстановления после недоступного, повреждённого или несовместимого прогресса; критерии AC-1…AC-6 предложены QA.
+- `SPEC-QUE-002` обновлена: добавлены USR-007…USR-011 и AC-4…AC-6, прослеживаемость на шесть решений и контент; публичный запуск и коммерческие обещания отмечены запрещёнными.
+- Реестр правил: BR-9…BR-13; всего 13 действующих правил, глоссарий — 9 терминов. BA-задача QUE-4 пересобрана из обновлённого разбора; анализ эпика QUE-1 обновлён.
+- Открытыми остаются только численные NFR и целевые платформы (блокируют перевод Feature в todo; переданы владельцу требований через Project Manager) и продуктовая метрика (до `business-case.md`, срез не блокирует). Технический формат хранения — SA.
+- Проверки после переноса: `analysis_check`, `story_doc_check`, `spec_check`, `readiness`, `epic_analysis_check`, `decision_check`, `record_validate` (QUE-1, QUE-2, QUE-3, QUE-4), `links_check` — `valid: true`; ворота `story-spec`, `ba`, `sa`, `qa-spec`, `feature-spec` — `ready: true`.
+- YouGile: `sync report` — `records: 4`, `pending: []`, `conflicts: []`, `problems: []`; удалённая QUE-3 содержит обновлённые сценарии и DoD, заголовок Feature — `[QUE-2]`. Project Owner исправил заголовок записи и обновил SPEC-ID-001; `record_validate.py` по QUE-2 — `valid: true`.
+- Изменения закоммичены в ветку `worktree-ba-que-3`, коммит `8d43c95`; включены решения и контент Project Owner. В удалённый git не пушилось. Реализация не начиналась; Feature остаётся в backlog до фиксации NFR и платформ.
 
 ## Документы
 - ADR: docs/decisions/2026-11-22-bundled-test-story-content.md
